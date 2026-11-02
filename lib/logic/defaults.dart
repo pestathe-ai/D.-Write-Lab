@@ -1,0 +1,107 @@
+import '../models/action_def.dart';
+
+/// Azioni presenti alla prima apertura. L'utente può modificarle o cancellarle.
+List<ActionDef> defaultActions() => [
+      ActionDef(id: 'b_copy', name: 'Copia', kind: ActionKind.copy, icon: '📋', builtIn: true),
+      ActionDef(id: 'b_share', name: 'Condividi', kind: ActionKind.share, icon: '📤', builtIn: true),
+      ActionDef(
+        id: 'b_mail',
+        name: 'Email',
+        kind: ActionKind.email,
+        icon: '✉️',
+        builtIn: true,
+      ),
+      ActionDef(
+        id: 'b_whatsapp',
+        name: 'WhatsApp',
+        kind: ActionKind.url,
+        template: 'https://wa.me/?text=[[bozza]]',
+        icon: '💬',
+        builtIn: true,
+      ),
+      ActionDef(
+        id: 'b_google',
+        name: 'Cerca su Google',
+        kind: ActionKind.url,
+        template: 'https://www.google.com/search?q=[[selezione]]',
+        icon: '🔎',
+        builtIn: true,
+      ),
+      ActionDef(
+        id: 'b_calendar',
+        name: 'Evento in calendario',
+        kind: ActionKind.url,
+        template:
+            'https://calendar.google.com/calendar/render?action=TEMPLATE&text=[[titolo]]&details=[[corpo]]',
+        icon: '📅',
+        builtIn: true,
+      ),
+      ActionDef(
+        id: 'b_stamp',
+        name: 'Aggiungi data e ora',
+        kind: ActionKind.append,
+        template: '\n— [[data]] [[ora]]',
+        icon: '🕒',
+        builtIn: true,
+      ),
+      ActionDef(
+        id: 'b_journal',
+        name: 'Nuova voce di diario',
+        kind: ActionKind.newDraft,
+        template: '# Diario [[data]]\n\n',
+        icon: '📓',
+        builtIn: true,
+      ),
+      ActionDef(id: 'b_check', name: 'Lista di controllo', kind: ActionKind.transform, transformId: 'checklist', icon: '☑️', builtIn: true),
+      ActionDef(id: 'b_sort', name: 'Ordina righe', kind: ActionKind.transform, transformId: 'sort', icon: '🔤', builtIn: true),
+      ActionDef(id: 'b_dedupe', name: 'Togli duplicati', kind: ActionKind.transform, transformId: 'dedupe', icon: '🧹', builtIn: true),
+      ActionDef(id: 'b_upper', name: 'MAIUSCOLO', kind: ActionKind.transform, transformId: 'upper', icon: '🔠', builtIn: true),
+      ActionDef(
+        id: 'b_ai_sum',
+        name: 'Riassumi (AI)',
+        kind: ActionKind.ai,
+        template: 'Riassumi questo testo in pochi punti chiari, in italiano:\n\n[[bozza]]',
+        aiOutput: AiOutput.show,
+        icon: '✨',
+        builtIn: true,
+      ),
+      ActionDef(
+        id: 'b_ai_fix',
+        name: 'Correggi (AI)',
+        kind: ActionKind.ai,
+        template:
+            'Correggi ortografia, grammatica e punteggiatura di questo testo senza cambiarne lo stile. Rispondi solo con il testo corretto:\n\n[[bozza]]',
+        aiOutput: AiOutput.replace,
+        icon: '🩹',
+        builtIn: true,
+      ),
+      ActionDef(
+        id: 'b_ai_en',
+        name: 'Traduci in inglese (AI)',
+        kind: ActionKind.ai,
+        template: 'Traduci in inglese. Rispondi solo con la traduzione:\n\n[[bozza]]',
+        aiOutput: AiOutput.show,
+        icon: '🌍',
+        builtIn: true,
+      ),
+      ActionDef(
+        id: 'b_ai_formal',
+        name: 'Rendi formale (AI)',
+        kind: ActionKind.ai,
+        template:
+            'Riscrivi questo testo con un tono professionale e cortese, adatto a una email di lavoro. Rispondi solo con il testo:\n\n[[bozza]]',
+        aiOutput: AiOutput.show,
+        icon: '👔',
+        builtIn: true,
+      ),
+      ActionDef(
+        id: 'b_ai_todo',
+        name: 'Estrai attività (AI)',
+        kind: ActionKind.ai,
+        template:
+            'Estrai da questo testo le cose da fare, una per riga, nel formato "- [ ] attività". Rispondi solo con l\'elenco:\n\n[[bozza]]',
+        aiOutput: AiOutput.newDraft,
+        icon: '✅',
+        builtIn: true,
+      ),
+    ];
