@@ -10,6 +10,12 @@ Future<AppStore> _store() async {
   return s;
 }
 
+/// Smonta l'app e lascia scadere i timer del salvataggio automatico.
+Future<void> _teardown(WidgetTester tester) async {
+  await tester.pumpWidget(const SizedBox());
+  await tester.pump(const Duration(seconds: 5));
+}
+
 void main() {
   testWidgets('scrivo, trasformo, annullo', (tester) async {
     final store = await _store();
@@ -34,6 +40,7 @@ void main() {
     await tester.tap(find.byTooltip('Annulla'));
     await tester.pump();
     expect(draft.text, 'latte\npane\nlatte');
+    await _teardown(tester);
   });
 
   testWidgets('archivio, lista e ripristino', (tester) async {
@@ -59,6 +66,7 @@ void main() {
     // Tornati all'editor con la bozza aperta.
     final field = tester.widget<TextField>(find.byType(TextField));
     expect(field.controller!.text, 'Idea geniale\ncon dettagli');
+    await _teardown(tester);
   });
 
   testWidgets('impostazioni, editor azioni e gestione si aprono', (tester) async {
@@ -90,5 +98,6 @@ void main() {
     await tester.tap(find.text('Salva'));
     await tester.pumpAndSettle();
     expect(store.actions.last.name, 'Prova mia');
+    await _teardown(tester);
   });
 }
